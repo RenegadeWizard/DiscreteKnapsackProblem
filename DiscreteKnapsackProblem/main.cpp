@@ -7,9 +7,14 @@
 //
 
 #include <iostream>
+#include "BackPack.hpp"
 
 int main(int argc, const char * argv[]) {
-    // insert code here...
-    std::cout << "Hello, World!\n";
+    int weight[] = {3,4,1,2};
+    int price[] = {5,2,1,4};
+    int C = 6;
+    int n = 4;
+    BackPack plecak(C,n,price,weight);
+    plecak.BruteForce();
     return 0;
 }

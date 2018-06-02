@@ -14,9 +14,11 @@ private:
     int n;       //Ilość elementów
     int *p;      //Tablica wartości
     int *w;      //Tablica wag
+public:
     BackPack(int wielkosc,int ile,int *wartosc,int *waga);
     ~BackPack();
-public:
     void BruteForce();
     void DynamicProgramming();
+    
+    void PrintElem();
 };
