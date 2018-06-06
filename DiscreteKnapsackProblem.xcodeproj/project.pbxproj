@@ -28,6 +28,7 @@
 		E232525C20AD734D0059C60F /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		E2B9FE3820C2C9030079C4F6 /* BackPack.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = BackPack.cpp; sourceTree = "<group>"; };
 		E2B9FE3920C2C9030079C4F6 /* BackPack.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = BackPack.hpp; sourceTree = "<group>"; };
+		E2F44D9120C56EF00060F7AB /* Timer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Timer.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +64,7 @@
 				E232525C20AD734D0059C60F /* main.cpp */,
 				E2B9FE3820C2C9030079C4F6 /* BackPack.cpp */,
 				E2B9FE3920C2C9030079C4F6 /* BackPack.hpp */,
+				E2F44D9120C56EF00060F7AB /* Timer.hpp */,
 			);
 			path = DiscreteKnapsackProblem;
 			sourceTree = "<group>";

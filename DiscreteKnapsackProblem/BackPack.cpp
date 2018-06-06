@@ -8,6 +8,7 @@
 
 #include "BackPack.hpp"
 #include <iostream>
+#include <list>
 
 BackPack::BackPack(int wielkosc,int ile,int *wartosc,int *waga){
     C = wielkosc;
@@ -24,7 +25,8 @@ BackPack::BackPack(int wielkosc,int ile,int *wartosc,int *waga){
 }
 
 BackPack::~BackPack(){
-    
+    delete [] w;
+    delete [] p;
 }
 
 void BackPack::PrintElem(){
@@ -64,7 +66,7 @@ void BackPack::BruteForce(){
     }
     
     //Printing outcome
-    
+    /*
     std::cout<<"Wynik: ";
     int which = 1;
     while(MaxMask){
@@ -74,10 +76,65 @@ void BackPack::BruteForce(){
         MaxMask >>= 1;
     }
     std::cout<<"\n";
-    
+    */
     
 }
 
 void BackPack::DynamicProgramming(){
-    return;
+    int ** workfield = new int*[n + 1];
+    std::list<int> sol;
+    for (int i = 0; i < n + 1; i++) {
+        workfield[i] = new int[C + 1];
+    }
+    for (int i = 0; i < C + 1; i++)
+        workfield[0][i] = 0;
+    for (int i = 0; i < n + 1; i++)
+        workfield[i][0] = 0;
+    
+    
+    for (int i = 1; i < n + 1; i++) {
+        for (int j = 1; j < C + 1; j++) {
+            if (j < w[i - 1]) { // jeśli nie mieści się element
+                workfield[i][j] = workfield[i - 1][j];
+            }
+            else { // jeśli się mieści
+                int a = workfield[i-1][j];
+                int b = workfield[i-1][j - w[i - 1]] + p[i - 1];
+                workfield[i][j] = a > b ? a : b;
+            }
+        }
+    }
+    
+    
+    
+    //Wypisz odpowiedz
+    
+    int i = n;
+    int j = C;
+    while (j>0 && i>0) {
+        if (workfield[i-1][j] != workfield[i][j]) {
+            //Tego wybralem
+            
+            sol.push_back(i);
+            
+            //Aktualizacja
+            i--;
+            j -= w[i];
+            
+        }
+        else {
+            i--;
+        }
+    }
+    
+    /*
+    std::cout << "\n\nsol = { ";
+    for (auto elem : sol)
+        std::cout << elem << ", ";
+    
+    std::cout << " }\n";
+    
+    std::cout << "sum = " << workfield[n][C];
+    */
+    delete [] workfield;
 }
