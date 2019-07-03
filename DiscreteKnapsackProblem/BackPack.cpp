@@ -10,7 +10,7 @@
 #include <iostream>
 #include <list>
 
-BackPack::BackPack(int wielkosc,int ile,int *wartosc,int *waga){
+BackPack::BackPack(int wielkosc,int ile,int *wartosc,int *waga) {
     C = wielkosc;
     n = ile;
     p = new int [n];
@@ -24,12 +24,15 @@ BackPack::BackPack(int wielkosc,int ile,int *wartosc,int *waga){
     
 }
 
-BackPack::~BackPack(){
+BackPack::~BackPack() {
     delete [] w;
     delete [] p;
 }
 
-void BackPack::PrintElem(){
+/*
+ Printing results on screen
+*/
+void BackPack::PrintElem() {
     std::cout<<"Weight: ";
     for (int i=0;i<n;i++)
         std::cout<<w[i]<<" ";
@@ -39,7 +42,10 @@ void BackPack::PrintElem(){
     std::cout<<"\n";
 }
 
-void BackPack::BruteForce(){
+/*
+ Brute-force way of solving the Knapsack problem
+*/
+void BackPack::BruteForce() {
     int MaxPrice, CurrentPrice;
     int CurrentWeight;
     int CurrentMask, MaxMask;
@@ -64,23 +70,12 @@ void BackPack::BruteForce(){
             MaxMask = i;
         }
     }
-    
-    //Printing outcome
-    /*
-    std::cout<<"Wynik: ";
-    int which = 1;
-    while(MaxMask){
-        if(MaxMask&1)
-            std::cout<<which<<" ";
-        which++;
-        MaxMask >>= 1;
-    }
-    std::cout<<"\n";
-    */
-    
 }
 
-void BackPack::DynamicProgramming(){
+/*
+ Solving the Knapsack problem with dynammic programming
+*/
+void BackPack::DynamicProgramming() {
     int ** workfield = new int*[n + 1];
     std::list<int> sol;
     for (int i = 0; i < n + 1; i++) {
@@ -94,10 +89,10 @@ void BackPack::DynamicProgramming(){
     
     for (int i = 1; i < n + 1; i++) {
         for (int j = 1; j < C + 1; j++) {
-            if (j < w[i - 1]) { // jeśli nie mieści się element
+            if (j < w[i - 1]) { // if the elements does not fit
                 workfield[i][j] = workfield[i - 1][j];
             }
-            else { // jeśli się mieści
+            else { // if it fits
                 int a = workfield[i-1][j];
                 int b = workfield[i-1][j - w[i - 1]] + p[i - 1];
                 workfield[i][j] = a > b ? a : b;
@@ -105,36 +100,21 @@ void BackPack::DynamicProgramming(){
         }
     }
     
-    
-    
-    //Wypisz odpowiedz
-    
     int i = n;
     int j = C;
     while (j>0 && i>0) {
         if (workfield[i-1][j] != workfield[i][j]) {
-            //Tego wybralem
+            // Chosen one
             
             sol.push_back(i);
             
-            //Aktualizacja
+            // Update
             i--;
             j -= w[i];
-            
         }
         else {
             i--;
         }
     }
-    
-    /*
-    std::cout << "\n\nsol = { ";
-    for (auto elem : sol)
-        std::cout << elem << ", ";
-    
-    std::cout << " }\n";
-    
-    std::cout << "sum = " << workfield[n][C];
-    */
     delete [] workfield;
 }

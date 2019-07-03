@@ -26,8 +26,6 @@ int main(int argc, const char * argv[]) {
     
     Timer time;
     
-//    int ile = sizeof(ilosc1);
-    
     while(!dane1.eof()){
         dane1 >> C;
         dane1 >> n;
@@ -52,6 +50,7 @@ int main(int argc, const char * argv[]) {
         delete [] price;
         delete plecak;
     }
+    
     while(!dane2.eof()){
         dane2 >> C;
         dane2 >> n;
